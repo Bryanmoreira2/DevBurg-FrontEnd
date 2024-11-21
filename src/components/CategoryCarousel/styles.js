@@ -62,4 +62,4 @@ export const CategoryButton = styled(Link)`
   &:hover{
     background-color: #9758a6;
   }
- `;
+`;
