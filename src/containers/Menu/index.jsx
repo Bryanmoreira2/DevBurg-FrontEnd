@@ -4,7 +4,8 @@ import {
     Banner, 
     ContegoryMenu, 
     ProductsContainer, 
-    ContegoryButton 
+    ContegoryButton, 
+    BackButton
 } from "./styles";                                              // Componentes estilizados
 import { api } from "../../services/api";                       // Configuração da API para chamadas HTTP
 import { CardProduct } from "../../components/CardProduct";     // Componente para exibir produtos
@@ -98,9 +99,11 @@ export function Menu() {
                             setActiveCategory(category.id);     // Atualiza a categoria ativa
                         }}
                     >
-                        {category.name}                         {/* Exibe o nome da categoria */}
+                        {category.name} 
+                                             {/* Exibe o nome da categoria */}
                     </ContegoryButton>
                 ))}
+                  <BackButton onClick={()=> navigate('/')}>voltar</BackButton> 
             </ContegoryMenu>
 
             {/* Lista de produtos filtrados */}

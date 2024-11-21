@@ -61,11 +61,12 @@ margin-top: 30px;
 export const ContegoryButton = styled(Link)`
 text-decoration: none;
 cursor: pointer;
-background: none;
-color: ${(props) => props.$isActiveCategory ? ' #12cc25' : '#975897'};
+background: ${(props) => props.$isActiveCategory ? ' #6f357c' : '#975897'};
+border-radius: 5px;
+padding: 7px;
+color: ${(props) => props.$isActiveCategory ? ' #12cc25' : '#ffff'};
 font-size: 24px;
 font-weight: 500;
-line-height: 20px ;
 border: none;
 border-bottom : ${(props) => props.$isActiveCategory && '3px solid #12cc25'};
 
@@ -81,4 +82,17 @@ justify-content: center;
 max-width: 1280px;
 margin: 50px auto 0;
 
+`;
+export const BackButton = styled.button`
+background-color:#975897;
+font-size: 24px;
+border: none;
+color: #ffffff;
+border-radius: 5px;
+padding: 7px;
+
+&:hover{
+    background: #6f357c;
+    border-bottom : 3px solid #12cc25;
+}
 `;
