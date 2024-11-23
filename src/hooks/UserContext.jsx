@@ -4,10 +4,36 @@ const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
 
-    const [userInfo,setUserInfo] = useState({ide: 55,name:'bryan33'});
+    const [userInfo,setUserInfo] = useState({});
+
+    const putUserData=(userInfo)=>{
+        setUserInfo(userInfo)
+
+
+        localStorage.setItem('devburg:userData',JSON.stringify(userInfo))
+    }
+
+    const logout=() =>{
+        setUserInfo({})
+        localStorage.removeItem('devburg:userData')
+
+       
+    };
+
+    useEffect (()=>{
+
+        const userInfolocalStorage = localStorage.getItem('devburg:userData')
+
+        if(userInfolocalStorage){
+
+            setUserInfo(JSON.parse(userInfolocalStorage))
+            
+        }
+
+    },[])
 
     return(
-        <UserContext.Provider value={{userInfo,}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{userInfo,putUserData,logout}}>{children}</UserContext.Provider>
     )
 }
 

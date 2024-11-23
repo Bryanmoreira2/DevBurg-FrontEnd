@@ -6,7 +6,6 @@ import { Banner, Container, Content } from "./styles";
 
 
 export function Home() {
-   
     return (
         <main>
             <Banner>

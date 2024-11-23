@@ -7,6 +7,7 @@ import { api } from '../../services/api';             // Configuração para cha
 import { useNavigate } from 'react-router-dom';       // Hook para navegação entre páginas
 import { toast } from 'react-toastify';               // Biblioteca para exibição de mensagens (toast)
 import { Button } from "../../components/Button";     // Componente de botão reutilizável
+import { useUser } from "../../hooks/UserContext";
 import Logo from "../../assets/Logo 1.svg";           // Imagem da logo
 import {
     Container,
@@ -21,6 +22,7 @@ import {
 // Componente principal para a página de login
 export function Login() {
     const navigate = useNavigate();                   // Inicializa a função de navegação
+    const {putUserData} = useUser();              // Inicializa o contexto de usuário
 
     // Esquema de validação para os campos de email e senha
     const schema = yup.object({
@@ -39,7 +41,7 @@ export function Login() {
 
     // Função chamada no envio do formulário
     const onSubmit = async (data) => {
-        const { data: { token } } = await toast.promise(
+        const { data: userData } = await toast.promise(
             api.post('/session', {
                 email: data.email,                    // Dados enviados: email
                 password: data.password,              // Dados enviados: senha
@@ -57,9 +59,8 @@ export function Login() {
                 error: 'Email ou Senha Incorretos🤯'  // Mensagem de erro
             }
         );
-
-        localStorage.setItem('token', token);         // Armazena o token no localStorage
-        console.log(response);                        // Log de depuração
+        putUserData(userData)
+               
     };
 
     return (
