@@ -13,4 +13,7 @@ color: #ffffff;
 &:hover{
     background-color:#6f357c;
 }
+&:active{
+background-color:#6f355c
+}
 `;

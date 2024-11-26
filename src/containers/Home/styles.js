@@ -7,7 +7,6 @@ background: url('${BannerHome}');
 background-size: cover;
 background-position: center;
 height: 480px;
-
 h1{
    
     font-family: "Road Rage", sans-serif;
@@ -15,7 +14,7 @@ h1{
     color:  #fff;
     position: absolute;
     right: 20%;
-    top: 10%;
+    top: 10%; 
 }
 `;
 export const Container = styled.section`
