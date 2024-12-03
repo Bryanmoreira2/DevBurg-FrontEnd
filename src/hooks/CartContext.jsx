@@ -1,41 +1,78 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-// Cria o contexto para o carrinho, usado para compartilhar estado global.
 const CartContext = createContext({});
 
-// Provedor do contexto, que encapsula os componentes que precisam acessar o carrinho.
 export const CartProvider = ({ children }) => {
-    
-    // Estado para armazenar os produtos adicionados ao carrinho.
     const [cartProducts, setCartProducts] = useState([]);
 
-    // Função para adicionar um produto ao carrinho.
     const putProductInCart = (product) => {
-        console.log(product);
-        // Implementar lógica para adicionar o produto ao carrinho.
+        const CartIndex = cartProducts.findIndex((prd) => prd.id === product.id);
+        let newProductsInCart;
+
+        if (CartIndex >= 0) {
+            newProductsInCart = [...cartProducts];
+            newProductsInCart[CartIndex] = {
+                ...newProductsInCart[CartIndex],
+                quantity: newProductsInCart[CartIndex].quantity + 1,
+            };
+        } else {
+            product.quantity = 1;
+            newProductsInCart = [...cartProducts, product];
+        }
+
+        setCartProducts(newProductsInCart);
+        updateLocalStorage(newProductsInCart);
     };
 
-    // Função para limpar todos os produtos do carrinho.
     const clearCart = () => {
-        // Implementar lógica para remover todos os produtos do carrinho.
+        setCartProducts([]);
+        updateLocalStorage([]);
     };
 
-    // Função para remover um produto específico do carrinho.
-    const deleteProduct = (product) => {
-        // Implementar lógica para excluir o produto informado.
+    const deleteProduct = (productId) => {
+        const newCart = cartProducts.filter((prd) => prd.id !== productId);
+        setCartProducts(newCart);
+        updateLocalStorage(newCart);
     };
 
-    // Função para aumentar a quantidade de um produto no carrinho.
     const increseProduct = (productId) => {
-        // Implementar lógica para incrementar a quantidade do produto.
+        const newCart = cartProducts.map((prd) =>
+            prd.id === productId
+                ? { ...prd, quantity: prd.quantity + 1 }
+                : prd
+        );
+        setCartProducts(newCart);
+        updateLocalStorage(newCart);
     };
 
-    // Função para diminuir a quantidade de um produto no carrinho.
     const decreaseProduct = (productId) => {
-        // Implementar lógica para decrementar a quantidade do produto.
+        const CartIndex = cartProducts.findIndex((prd) => prd.id === productId);
+        if (CartIndex < 0) return;
+
+        if (cartProducts[CartIndex].quantity > 1) {
+            const newCart = cartProducts.map((prd) =>
+                prd.id === productId
+                    ? { ...prd, quantity: prd.quantity - 1 }
+                    : prd
+            );
+            setCartProducts(newCart);
+            updateLocalStorage(newCart);
+        } else {
+            deleteProduct(productId);
+        }
     };
 
-    // Retorna o provedor com os valores e funções disponíveis para os componentes filhos.
+    const updateLocalStorage = (products) => {
+        localStorage.setItem('devburg:cartInfo', JSON.stringify(products));
+    };
+
+    useEffect(() => {
+        const clientCartData = localStorage.getItem('devburg:cartInfo');
+        if (clientCartData) {
+            setCartProducts(JSON.parse(clientCartData));
+        }
+    }, []);
+
     return (
         <CartContext.Provider
             value={{
@@ -52,14 +89,10 @@ export const CartProvider = ({ children }) => {
     );
 };
 
-// Hook personalizado para consumir o contexto do carrinho de forma simplificada.
 export const useCart = () => {
-    const context = useContext(CartContext); // Obtém o contexto atual.
-
-    // Lança erro se o hook for usado fora do CartProvider.
+    const context = useContext(CartContext);
     if (!context) {
         throw new Error('useCart must be used within a CartProvider');
     }
-
-    return context; // Retorna o contexto.
+    return context;
 };

@@ -52,12 +52,29 @@ position: relative;
 
 export const Content = styled.div`
 display: grid;
-grid-template-columns: repeat(1fr 20%);
+grid-template-columns: 1fr 20%;
 gap:20px;
 width: 100%;
 max-width: 1280px;
 padding: 40px;
 margin: 0 auto;
+
+*{
+   color :  #484848;
+   font-weight: 500;
+}
+.conteiner-top{
+    display: grid;
+    grid-gap :10px,50%;
+    grid-template-areas:
+    'title title'
+    'items items-price'
+    'delivery-tax delivery-tax-price';
+
+.title{
+    grid-area:title;
+}
+}
 
 `;
 

@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 
-import { CategoryCarousel } from "../../components/CategoryCarousel";
-import { OffersCarousel } from "../../components/OffersCarousel";
+import { CategoryCarousel,OffersCarousel  } from "../../components";
 import { Banner, Container, Content } from "./styles";
 
 
