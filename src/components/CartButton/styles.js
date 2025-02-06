@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 export const ContainerBuntto = styled.button`
-background-color: #9758a6;
+background-color: ${(props)=>props.theme.purple};
 width: 100%;
 height: 52px;
 border: 0;
@@ -11,9 +11,9 @@ font-size: 30px;
 color: #ffffff;
 
 &:hover{
-    background-color:#6f357c;
+    background-color:${(props)=>props.theme.darkPurple};
 }
 &:active{
-background-color:#6f355c
+background-color:${(props)=>props.theme.secondDarkPurple}
 }
 `;

@@ -12,7 +12,6 @@ function logoutUser(){
     logout()
     navigate('/login')
 }
-console.log(userInfo)
     return (
         <Container>
             <Content>

@@ -58,20 +58,23 @@ margin-top: 30px;
 
 `;
 
-export const ContegoryButton = styled(Link)`
+export const ContegoryButton = styled (Link)`
 text-decoration: none;
 cursor: pointer;
-background: ${(props) => props.$isActiveCategory ? ' #6f357c' : '#975897'};
+background: ${(props) => props.$isActiveCategory ? (props)=>props.theme.secondDarkPurple : (props)=>props.theme.purple };
 border-radius: 5px;
 padding: 7px;
-color: ${(props) => props.$isActiveCategory ? ' #12cc25' : '#ffff'};
+color: ${(props) => props.$isActiveCategory ? (props)=>props.theme.gren : '#ffff'};
 font-size: 24px;
 font-weight: 500;
 border: none;
-border-bottom : ${(props) => props.$isActiveCategory && '3px solid #12cc25'};
+border-bottom : ${(props) => props.$isActiveCategory && `3px solid ${props.theme.gren}`};
 
-
+&:hover{
+    background:${(props)=>props.theme.darkPurple};
+    border-bottom : ${(props) => `3px solid ${props.theme.gren}`};}
 `;
+
 
 export const ProductsContainer = styled.div`
 display: grid;
@@ -84,7 +87,7 @@ margin: 50px auto 0;
 
 `;
 export const BackButton = styled.button`
-background-color:#975897;
+background-color:${(props)=>props.theme.purple};
 font-size: 24px;
 border: none;
 color: #ffffff;
@@ -92,7 +95,7 @@ border-radius: 5px;
 padding: 7px;
 
 &:hover{
-    background: #6f357c;
-    border-bottom : 3px solid #12cc25;
+    background:${(props)=>props.theme.darkPurple};
+    border-bottom : 3px solid ${(props)=>props.theme.gren};
 }
 `;

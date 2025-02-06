@@ -38,14 +38,14 @@ div{
 
 `;
 export const HeaderLink = styled(Link)`
-color: ${ (props) => (props.$isActive ? '#9758a6' : '#fff') };
-border-bottom: ${ (props) => (props.$isActive ? ' 1px solid #9758a6' : 'none') };
+color: ${ (props) => (props.$isActive ? (props) => props.theme.purple : '#fff') };
+border-bottom: ${ (props) => (props.$isActive ? `1px solid ${props.theme.purple}` : 'none') };
 text-decoration: none;
 font-size: 14px;
 transition: color 200ms ;
 
 &:hover{
-    color: #9758a6
+    color: ${(props)=>props.theme.purple}
 }
 
 `;
@@ -67,7 +67,7 @@ p{
     
   span{
     font-weight: 700;
-    color:#9758a6 ;
+    color:${(props)=>props.theme.purple} ;
   }  
 }
 `;

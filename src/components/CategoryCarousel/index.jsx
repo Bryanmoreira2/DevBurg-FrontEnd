@@ -1,20 +1,23 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
-import { api } from '../../services/api'
+import { api } from '../../services/api';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Title, Container, ContainerItems, CategoryButton } from './styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"; // Importe o useNavigate
 
 export function CategoryCarousel() {
     const [categories, setCategories] = useState([]);
-    const navigte = useNavigate()
+    const navigate = useNavigate(); // Adicione esta linha
 
     useEffect(() => {
         async function loadCategories() {
-            const { data } = await api.get('/categories');
-
-            setCategories(data);
+            try {
+                const { data } = await api.get('/categories');
+                setCategories(data);
+                console.log(data);
+            } catch (error) {
+                console.error('Erro ao carregar categorias:', error);
+            }
         }
         loadCategories();
     }, []);
@@ -36,31 +39,28 @@ export function CategoryCarousel() {
             breakpoint: { max: 690, min: 0 },
             items: 2
         },
-    }
+    };
+
     return (
-        <Container >
+        <Container>
             <Title>Categorias</Title>
             <Carousel
                 responsive={responsive}
                 infinite={true}
-                partilVisible={false}
+                partialVisible={false}
                 itemClass="carousel-item"
             >
                 {categories.map(category => (
                     <ContainerItems key={category.id} imageUrl={category.url}>
                         <CategoryButton
-                        onClick={()=>{
-                            navigte(
-                                {
-                                pathname: `/cardapio`,      // Navega para a URL com a categoria
-                                    search: `?categoria=${category.id}`
-                        })
-                        }}
+                        onClick={() => navigate(`/cardapio?categoria=${category.id}`)} // Adicione esta linha
+                        >{category.name}</CategoryButton>
+                            
+                            
                         
-                        >{''}{category.name}{''}</CategoryButton>
+                        
                     </ContainerItems>
                 ))}
-
             </Carousel>
         </Container>
     );

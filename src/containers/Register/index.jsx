@@ -89,7 +89,7 @@ export function Register() {
                             placeholder="Seu nome" 
                             {...register("name")}                 // Registra o campo nome
                         />
-                        <p>{errors?.name?.message}</p>           // Exibe erro de validação para nome
+                        <p>{errors?.name?.message}</p>           
                     </InputContainer>
                     <InputContainer>
                         <label>Email</label>
@@ -98,7 +98,7 @@ export function Register() {
                             placeholder="exemplo@devburguer.com" 
                             {...register("email")}               // Registra o campo email
                         />
-                        <p>{errors?.email?.message}</p>          // Exibe erro de validação para email
+                        <p>{errors?.email?.message}</p>          
                     </InputContainer>
                     <InputContainer>
                         <label>Senha</label>
@@ -107,7 +107,7 @@ export function Register() {
                             placeholder="*********" 
                             {...register("password")}            // Registra o campo senha
                         />
-                        <p>{errors?.password?.message}</p>       // Exibe erro de validação para senha
+                        <p>{errors?.password?.message}</p>       
                     </InputContainer>
                     <InputContainer>
                         <label>Confirmar Senha</label>
@@ -116,9 +116,9 @@ export function Register() {
                             placeholder="*********" 
                             {...register("confirmPassword")}     // Registra o campo de confirmação de senha
                         />
-                        <p>{errors?.confirmPassword?.message}</p> // Exibe erro de validação para confirmação de senha
+                        <p>{errors?.confirmPassword?.message}</p> 
                     </InputContainer>
-                    <Button type="submit">Criar conta</Button>   // Botão para envio do formulário
+                    <Button type="submit">Criar conta</Button>   
                 </Form>
                 <p>Já possui conta? <Link to="/login">Clique aqui.</Link></p> {/* Link para login */}
             </RightContiner>

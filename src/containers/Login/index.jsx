@@ -51,7 +51,12 @@ export function Login() {
                 success: {
                     render({ data }) {
                         setTimeout(() => {
-                            navigate('/');            // Redireciona para a página inicial após login bem-sucedido
+                            if(userData?.admin){
+                                navigate('/admin/pedidos');
+                            } else{
+                                navigate('/');   // Redireciona para a página inicial após login bem-sucedido
+                            }
+                                     
                         }, 2000);
                         return `Bem vindo ${data.data.name},`; // Mensagem de sucesso
                     }
@@ -85,7 +90,7 @@ export function Login() {
                             placeholder="exemplo@devburguer.com" 
                             {...register("email")}                 // Registra o campo email
                         />
-                        <p>{errors?.email?.message}</p>           // Exibe erro de validação para email
+                        <p>{errors?.email?.message}</p>           
                     </InputContainer>
                     <InputContainer>
                         <label>Senha</label>
@@ -94,9 +99,9 @@ export function Login() {
                             placeholder="*********" 
                             {...register("password")}              // Registra o campo senha
                         />
-                        <p>{errors?.password?.message}</p>        // Exibe erro de validação para senha
+                        <p>{errors?.password?.message}</p>        
                     </InputContainer>
-                    <Button type="submit">Entrar</Button>         // Botão para envio
+                    <Button type="submit">Entrar</Button>         
                 </Form>
                 <p>Não possui conta? <Link to="/cadastro">Clique aqui.</Link></p> {/* Link para cadastro */}
             </RightContiner>
